@@ -58,7 +58,7 @@ python get_NASA_APOD_image.py
 ```
 C указанием параметра:
 ```
-python get_NASA_APOD_image.py -с=10
+python get_NASA_APOD_image.py -c=10
 ```
 Для подробного описания скрипта ввести в терминале
 ```
