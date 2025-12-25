@@ -8,8 +8,6 @@ def save_images_from_links(links, path, site_name):
 	for index, link in enumerate(links):
 		response_image = requests.get(link)
 		response_image.raise_for_status()
-		if 'error' in response_image.text:
-			raise Exception(response_image.text)
 
 		extension = get_extension_from_url(link)
 		with open(f'{path}{site_name}{index}{extension}', 'wb') as file:
