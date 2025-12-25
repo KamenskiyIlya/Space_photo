@@ -17,7 +17,7 @@ def get_cmd_args_apod():
 	args = parser.parse_args()
 	return args
 
-def get_nasa_apod_images(count=1):
+def get_nasa_apod_images(count='1'):
 	params = {
 				'api_key': env.str('NASA_API_KEY', 'DEMO_KEY'),
 				'count': count,
@@ -25,6 +25,9 @@ def get_nasa_apod_images(count=1):
 	url = 'https://api.nasa.gov/planetary/apod'
 	response = requests.get(url, params=params)
 	response.raise_for_status()
+	if 'error' in response.text:
+		raise Exception(response.text)
+	
 	response_payload = response.json()
 	images_links =[payload['hdurl'] for payload in response_payload if 'hdurl' in payload]
 
