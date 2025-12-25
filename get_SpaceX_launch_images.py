@@ -29,6 +29,9 @@ def get_spacex_launch_images(id='latest', random=False):
 		url = 'https://api.spacexdata.com/v5/launches/'
 		all_lounch_response = requests.get(url)
 		all_lounch_response.raise_for_status()
+		if 'error' in response.text:
+			raise Exception(response.text)
+
 		response_payload = all_lounch_response.json()
 		launches_id = [launch["id"] for launch in response_payload]
 		id = choice(launches_id)
@@ -36,6 +39,9 @@ def get_spacex_launch_images(id='latest', random=False):
 	url = f'https://api.spacexdata.com/v5/launches/{id}'
 	response = requests.get(url)
 	response.raise_for_status()
+	if 'error' in response.text:
+		raise Exception(response.text)
+
 	response_payload = response.json()
 	images_links = response_payload["links"]["flickr"]["original"]
 
