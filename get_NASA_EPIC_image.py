@@ -22,8 +22,7 @@ def get_cmd_args_epic():
 
 def get_nasa_epic_images(count=1):
 	params = {
-				'api_key': env.str('NASA_API_KEY', 'DEMO_KEY'),
-				'count': count,
+				'api_key': env.str('NASA_API_KEY', 'DEMO_KEY')
 	}
 	url = 'https://api.nasa.gov/EPIC/api/natural/images'
 	params_image_response = requests.get(url, params=params)
