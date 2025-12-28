@@ -64,7 +64,6 @@ def main():
 
 	os.makedirs('images', exist_ok=True)
 
-
 	args = get_cmd_args_epic()
 
 	get_nasa_epic_images(api_key, args.count)

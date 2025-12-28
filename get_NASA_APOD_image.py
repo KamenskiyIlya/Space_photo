@@ -51,7 +51,6 @@ def main():
 
 	os.makedirs('images', exist_ok=True)
 
-
 	args = get_cmd_args_apod()
 
 	get_nasa_apod_images(api_key, args.count)
