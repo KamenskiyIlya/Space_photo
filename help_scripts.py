@@ -12,7 +12,6 @@ def save_images_from_links(links, path, site_name):
 		extension = get_extension_from_url(link)
 		with open(f'{path}{site_name}{index}{extension}', 'wb') as file:
 			file.write(response_image.content)
-			file.close()
 
 def get_extension_from_url(url):
 	file_name = urlsplit(url)
