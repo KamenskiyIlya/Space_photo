@@ -11,13 +11,14 @@ def get_cmd_args_apod():
 	parser.add_argument(
 		'-c',
 		'--count',
-		default='1',
+		type=int,
+		default=1,
 		help='Укажите какое кол-во фото нужно скачать за раз'
 	)
 	args = parser.parse_args()
 	return args
 
-def get_nasa_apod_images(count='1'):
+def get_nasa_apod_images(count=1):
 	params = {
 				'api_key': env.str('NASA_API_KEY', 'DEMO_KEY'),
 				'count': count,

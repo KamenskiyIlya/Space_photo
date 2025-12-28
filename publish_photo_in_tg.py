@@ -11,6 +11,7 @@ def get_cmd_photo_name():
 	parser.add_argument(
 		'-n',
 		'--photo_name',
+		type=str,
 		default=None,
 		help='Укажите имя файл, если хотите хотите запостить конкретное фото с указанием разрешения'
 	)

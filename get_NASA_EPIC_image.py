@@ -14,6 +14,7 @@ def get_cmd_args_epic():
 	parser.add_argument(
 		'-c',
 		'--count',
+		type=int,
 		default=1,
 		help='Укажите какое кол-во фото нужно скачать за раз(не более 13шт)'
 	)
