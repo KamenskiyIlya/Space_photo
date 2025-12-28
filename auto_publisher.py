@@ -2,7 +2,7 @@ import telegram
 from environs import Env
 import time
 
-from help_scripts import post_photo_in_tg, get_photo_name
+from help_scripts import post_photo_in_tg, get_random_photo_name
 
 
 def main():
@@ -15,7 +15,7 @@ def main():
 
 	while True:
 		try:
-			photo_name = get_photo_name()
+			photo_name = get_random_photo_name()
 			post_photo_in_tg(chat_id, bot, photo_name)
 			time.sleep(delay_time)
 		except telegram.error.BadRequest as er:

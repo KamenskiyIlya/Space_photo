@@ -28,7 +28,6 @@ def post_photo_in_tg(chat_id, bot, photo_name):
 	return
 
 
-def get_photo_name(photo_name=None):
-	if not photo_name:
-		photo_name = choice(os.listdir('images'))
+def get_random_photo_name():
+	photo_name = choice(os.listdir('images'))
 	return photo_name

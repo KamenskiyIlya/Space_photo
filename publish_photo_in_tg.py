@@ -2,7 +2,7 @@ import telegram
 from environs import Env
 import argparse
 
-from help_scripts import post_photo_in_tg, get_photo_name
+from help_scripts import post_photo_in_tg, get_random_photo_name
 
 
 def get_cmd_photo_name():
@@ -28,8 +28,11 @@ def main():
 	bot = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
 
 	args = get_cmd_photo_name()
-	photo_name = get_photo_name(args.photo_name)
-	post_photo_in_tg(chat_id, bot, photo_name)
+	if not args.photo_name:
+		photo_name = get_random_photo_name()
+		post_photo_in_tg(chat_id, bot, photo_name)
+	else:
+		post_photo_in_tg(chat_id, bot, args.photo_name)
 
 
 if __name__ == '__main__':
