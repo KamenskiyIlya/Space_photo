@@ -1,9 +1,9 @@
 import telegram
-import urllib3
 from environs import Env
 import time
 
 from help_scripts import post_photo_in_tg, get_photo_name
+
 
 def main():
 	env = Env()
@@ -24,4 +24,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-

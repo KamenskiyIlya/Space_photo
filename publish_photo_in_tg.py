@@ -1,5 +1,4 @@
 import telegram
-import urllib3
 from environs import Env
 import argparse
 
@@ -13,10 +12,14 @@ def get_cmd_photo_name():
 		'--photo_name',
 		type=str,
 		default=None,
-		help='Укажите имя файл, если хотите хотите запостить конкретное фото с указанием разрешения'
+		help=(
+			'Укажите имя файл, если хотите хотите запостить '
+			'конкретное фото с указанием разрешения'
+		)
 	)
 	args = parser.parse_args()
 	return args
+
 
 def main():
 	env = Env()
@@ -26,8 +29,8 @@ def main():
 
 	args = get_cmd_photo_name()
 	photo_name = get_photo_name(args.photo_name)
-	post_photo_in_tg(chat_id, bot, photo_name)	
+	post_photo_in_tg(chat_id, bot, photo_name)
+
 
 if __name__ == '__main__':
 	main()
-

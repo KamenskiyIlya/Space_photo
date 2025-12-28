@@ -13,6 +13,7 @@ def save_images_from_links(links, path, site_name):
 		with open(f'{path}{site_name}{index}{extension}', 'wb') as file:
 			file.write(response_image.content)
 
+
 def get_extension_from_url(url):
 	file_name = urlsplit(url)
 	file_name = file_name[2]
@@ -20,10 +21,12 @@ def get_extension_from_url(url):
 	extension = extension[1]
 	return extension
 
+
 def post_photo_in_tg(chat_id, bot, photo_name):
 	with open(f'images/{photo_name}', 'rb') as photo:
 		bot.send_photo(chat_id=chat_id, photo=photo)
 	return
+
 
 def get_photo_name(photo_name=None):
 	if not photo_name:

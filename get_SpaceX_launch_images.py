@@ -12,17 +12,24 @@ def get_cmd_args_spacex():
 		'-id',
 		'--launch_id',
 		default='latest',
-		help='Скачивает фото запуска с указанным id, если id не задается, тогда скачиваются фото последнего запуска'
+		help=(
+			'Скачивает фото запуска с указанным id, если id не задается, '
+			'тогда скачиваются фото последнего запуска'
+		)
 	)
 	parser.add_argument(
 		'-r',
 		'--random_launch',
 		type=bool,
 		default=False,
-		help='Если указать этот параметр как булево значение True, тогда скачаются фото случайного запуска.'
+		help=(
+			'Если указать этот параметр как булево значение True, '
+			'тогда скачаются фото случайного запуска.'
+		)
 	)
 	args = parser.parse_args()
 	return args
+
 
 def get_spacex_launch_images(id='latest', random=False):
 	if random:
@@ -30,7 +37,7 @@ def get_spacex_launch_images(id='latest', random=False):
 		all_lounch_response = requests.get(url)
 		all_lounch_response.raise_for_status()
 		if 'error' in all_lounch_response:
-			raise Exception(response.text)
+			raise Exception(all_lounch_response.text)
 
 		response_payload = all_lounch_response.json()
 		launches_id = [launch["id"] for launch in response_payload]
@@ -45,16 +52,17 @@ def get_spacex_launch_images(id='latest', random=False):
 	response_payload = response.json()
 	images_links = response_payload["links"]["flickr"]["original"]
 
-	if not images_links:	
+	if not images_links:
 		return 'SpaceX не делала фото этого запуска.'
-	elif images_links:	
+	elif images_links:
 		save_images_from_links(images_links, path, 'SpaceX_')
 	return
+
 
 if __name__ == '__main__':
 	os.makedirs('images', exist_ok=True)
 	path = 'images/'
-	
+
 	args = get_cmd_args_spacex()
 
 	get_spacex_launch_images(args.launch_id, args.random_launch)
