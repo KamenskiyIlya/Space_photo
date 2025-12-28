@@ -10,12 +10,13 @@ def main():
 	env.read_env()
 	chat_id = env.str('CHAT_ID')
 	bot = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
+	delay_time = env.int('DELAY_TIME', 14400)
 
 	while True:
 		try:
 			photo_name = get_photo_name()
 			post_photo_in_tg(chat_id, bot, photo_name)
-			time.sleep(env.int('TIME_SLEEP', 14400))
+			time.sleep(delay_time)
 		except telegram.error.BadRequest as er:
 			print(er)
 
