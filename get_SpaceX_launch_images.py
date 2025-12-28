@@ -29,7 +29,7 @@ def get_spacex_launch_images(id='latest', random=False):
 		url = 'https://api.spacexdata.com/v5/launches/'
 		all_lounch_response = requests.get(url)
 		all_lounch_response.raise_for_status()
-		if 'error' in response.text:
+		if 'error' in all_lounch_response:
 			raise Exception(response.text)
 
 		response_payload = all_lounch_response.json()
