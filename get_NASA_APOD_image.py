@@ -19,9 +19,9 @@ def get_cmd_args_apod():
 	return args
 
 
-def get_nasa_apod_images(count=1):
+def get_nasa_apod_images(count=1, api_key):
 	params = {
-		'api_key': env.str('NASA_API_KEY', 'DEMO_KEY'),
+		'api_key': api_key,
 		'count': count,
 	}
 	url = 'https://api.nasa.gov/planetary/apod'
@@ -43,13 +43,18 @@ def get_nasa_apod_images(count=1):
 	return
 
 
-if __name__ == '__main__':
+def main():
 	env = Env()
 	env.read_env()
+	api_key = env.str('NASA_API_KEY', 'DEMO_KEY')
 
 	os.makedirs('images', exist_ok=True)
 	path = 'images/'
 
 	args = get_cmd_args_apod()
 
-	get_nasa_apod_images(args.count)
+	get_nasa_apod_images(args.count, api_key)
+
+
+if __name__ == '__main__':
+	main()
