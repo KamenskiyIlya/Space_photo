@@ -3,10 +3,10 @@ import urllib3
 from environs import Env
 import argparse
 
-from help_scripts import post_photo_in_tg
+from help_scripts import post_photo_in_tg, get_photo_name
 
 
-def get_photo_name():
+def get_cmd_photo_name():
 	parser = argparse.ArgumentParser(description='Post photo in telegram')
 	parser.add_argument(
 		'-n',
@@ -23,8 +23,9 @@ def main():
 	chat_id = env.str('CHAT_ID')
 	bot = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
 
-	args = get_photo_name()
-	post_photo_in_tg(chat_id, bot, args.photo_name)	
+	args = get_cmd_photo_name()
+	photo_name = get_photo_name(args.photo_name)
+	post_photo_in_tg(chat_id, bot, photo_name)	
 
 if __name__ == '__main__':
 	main()

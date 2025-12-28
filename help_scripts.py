@@ -20,11 +20,12 @@ def get_extension_from_url(url):
 	extension = extension[1]
 	return extension
 
-def post_photo_in_tg(chat_id, bot, photo_name=None):
-	if not photo_name:
-		photo_name = choice(os.listdir('images'))
-
+def post_photo_in_tg(chat_id, bot, photo_name):
 	with open(f'images/{photo_name}', 'rb') as photo:
 		bot.send_photo(chat_id=chat_id, photo=photo)
-
 	return
+
+def get_photo_name(photo_name=None):
+	if not photo_name:
+		photo_name = choice(os.listdir('images'))
+	return photo_name
