@@ -6,12 +6,6 @@ import argparse
 from help_scripts import post_photo_in_tg
 
 
-env = Env()
-env.read_env()
-
-CHAT_ID = env.str('CHAT_ID')
-BOT = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
-
 def get_photo_name():
 	parser = argparse.ArgumentParser(description='Post photo in telegram')
 	parser.add_argument(
@@ -23,7 +17,15 @@ def get_photo_name():
 	args = parser.parse_args()
 	return args
 
-if __name__ == '__main__':
+def main():
+	env = Env()
+	env.read_env()
+	chat_id = env.str('CHAT_ID')
+	bot = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
+
 	args = get_photo_name()
-	post_photo_in_tg(CHAT_ID, BOT, args.photo_name)
+	post_photo_in_tg(chat_id, bot, args.photo_name)	
+
+if __name__ == '__main__':
+	main()
 

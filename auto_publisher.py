@@ -5,18 +5,20 @@ import time
 
 from help_scripts import post_photo_in_tg
 
-
-env = Env()
-env.read_env()
-
-CHAT_ID = env.str('CHAT_ID')
-BOT = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
-
-if __name__ == '__main__':
+def main():
+	env = Env()
+	env.read_env()
+	chat_id = env.str('CHAT_ID')
+	bot = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
 
 	while True:
 		try:
-			post_photo_in_tg(CHAT_ID, BOT)
+			post_photo_in_tg(chat_id, bot)
 			time.sleep(env.int('TIME_SLEEP', 14400))
 		except telegram.error.BadRequest as er:
 			print(er)
+
+
+if __name__ == '__main__':
+	main()
+
