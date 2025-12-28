@@ -4,9 +4,9 @@ import os
 from random import choice
 
 
-def save_images_from_links(links, path, site_name):
+def save_images_from_links(links, path, site_name, params=None):
 	for index, link in enumerate(links):
-		response_image = requests.get(link)
+		response_image = requests.get(link, params=params)
 		response_image.raise_for_status()
 
 		extension = get_extension_from_url(link)

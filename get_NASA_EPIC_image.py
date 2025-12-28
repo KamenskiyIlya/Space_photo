@@ -20,7 +20,8 @@ def get_cmd_args_epic():
 	return args
 
 
-def get_nasa_epic_images(count=1, api_key):
+def get_nasa_epic_images(api_key, count=1):
+	path = 'images/'
 	params = {
 		'api_key': api_key
 	}
@@ -40,10 +41,11 @@ def get_nasa_epic_images(count=1, api_key):
 		image_name = params_image_response_payload["image"]
 		image_datetime_str = params_image_response_payload["date"]
 		image_datetime = datetime.strptime(image_datetime_str, '%Y-%m-%d %H:%M:%S')
+
 		image_url = (
 			'https://api.nasa.gov/EPIC/archive/natural/'
 			f'{image_datetime.year}/{image_datetime.month}/{image_datetime.day}'
-			f'/png/{image_name}.png?api_key={params['api_key']}'
+			f'/png/{image_name}.png'
 		)
 		images_links.append(image_url)
 		counter += 1
@@ -51,7 +53,7 @@ def get_nasa_epic_images(count=1, api_key):
 	if not images_links:
 		return 'NASA не смогли прислать фото, попробуйте ещё раз'
 	elif images_links:
-		save_images_from_links(images_links, path, 'nasa_epic_')
+		save_images_from_links(images_links, path, 'nasa_epic_', params)
 	return
 
 
@@ -61,11 +63,11 @@ def main():
 	api_key = env.str('NASA_API_KEY', 'DEMO_KEY')
 
 	os.makedirs('images', exist_ok=True)
-	path = 'images/'
+
 
 	args = get_cmd_args_epic()
 
-	get_nasa_epic_images(args.count, api_key)
+	get_nasa_epic_images(api_key, args.count)
 
 
 if __name__ == '__main__':

@@ -19,7 +19,8 @@ def get_cmd_args_apod():
 	return args
 
 
-def get_nasa_apod_images(count=1, api_key):
+def get_nasa_apod_images(api_key, count=1):
+	path = 'images/'
 	params = {
 		'api_key': api_key,
 		'count': count,
@@ -49,11 +50,11 @@ def main():
 	api_key = env.str('NASA_API_KEY', 'DEMO_KEY')
 
 	os.makedirs('images', exist_ok=True)
-	path = 'images/'
+
 
 	args = get_cmd_args_apod()
 
-	get_nasa_apod_images(args.count, api_key)
+	get_nasa_apod_images(api_key, args.count)
 
 
 if __name__ == '__main__':
