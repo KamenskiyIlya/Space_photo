@@ -10,7 +10,8 @@ def main():
 	env.read_env()
 	chat_id = env.str('CHAT_ID')
 	bot = telegram.Bot(token=env.str('TG_BOT_TOKEN'))
-	delay_time = env.int('DELAY_TIME', 14400)
+	STANDART_TIME_DELAY = 14400
+	delay_time = env.int('DELAY_TIME', STANDART_TIME_DELAY)
 
 	while True:
 		try:
