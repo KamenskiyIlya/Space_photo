@@ -24,10 +24,7 @@ def get_cmd_args_spacex():
 	return args
 
 
-def get_spacex_launch_images(launch_id='latest', random=False):
-	if random:
-		launch_id = get_random_launch_id()
-
+def get_spacex_launch_images(launch_id='latest'):
 	path = 'images/'
 	url = f'https://api.spacexdata.com/v5/launches/{launch_id}'
 	response = requests.get(url)
@@ -60,5 +57,9 @@ if __name__ == '__main__':
 	os.makedirs('images', exist_ok=True)
 
 	args = get_cmd_args_spacex()
+	if args.launch_id == 'random':
+		launch_id = get_random_launch_id()
+	else:
+		launch_id = args.launch_id
 
-	get_spacex_launch_images(args.launch_id, args.random_launch)
+	get_spacex_launch_images(launch_id)
